@@ -5,6 +5,7 @@ import {Subject} from 'rxjs';
 export class RecipeService {
 
   selectedRecipe = new Subject<Recipe>();
+  recipesChanged = new Subject<Recipe[]>();
 
   private recipies: Recipe[] = [
     new Recipe('Schabowy',
@@ -26,7 +27,6 @@ export class RecipeService {
   }
 
   getRecipeById(id: number): Recipe {
-    console.log(id, " object is");
     return this.recipies.slice(id, id+1)[0];
   }
 
@@ -34,5 +34,20 @@ export class RecipeService {
     return this.recipies.findIndex((p: Recipe) => {
       return p.name === recipe.name;
     });
+  }
+
+  addRecipe(newRecipe: Recipe) {
+    this.recipies.push(newRecipe);
+    this.recipesChanged.next(this.getRecipes());
+  }
+
+  updateRecipe(index: number, recipe: Recipe) {
+    this.recipies[index] = recipe;
+    this.recipesChanged.next(this.getRecipes());
+  }
+
+  deleteRecipe(id: number) {
+    this.recipies.splice(id, 1);
+    this.recipesChanged.next(this.getRecipes());
   }
 }
