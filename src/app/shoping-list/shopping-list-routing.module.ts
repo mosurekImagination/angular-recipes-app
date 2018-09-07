@@ -4,7 +4,7 @@ import {ShopingListComponent} from './shoping-list.component';
 import {ShopingEditComponent} from './shoping-edit/shoping-edit.component';
 
 const shoppingListRoutes: Routes = [
-  { path: 'shoping-list', component: ShopingListComponent, children: [
+  { path: '', component: ShopingListComponent, children: [
       { path: ':id', component: ShopingEditComponent}]}
 ];
 

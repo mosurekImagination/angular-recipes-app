@@ -4,7 +4,8 @@ import {HomeComponent} from './home/home.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
-  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule'}
+  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule'},
+  { path: 'shopping-list', loadChildren: './shoping-list/shopping-list.module#ShoppingListModule'} //canLoad: [AuthGuard] for prevent not logged in users and implement CanLoad
 ];
 
 @NgModule({
