@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {DataStorageService} from '../../shared/data-storage.service';
 import {RecipeService} from '../../recipes/recipe.service';
 import {AuthService} from '../../auth/auth.service';
+import {Recipe} from '../../recipes/recipe.model';
 
 @Component({
   selector: 'app-header',
@@ -26,8 +27,8 @@ export class HeaderComponent implements OnInit {
 
   loadData() {
     this.dataStorageService.getData()
-      .subscribe( (response) => {
-        this.recipeService.setRecipes(response.json());
+      .subscribe( (response: Recipe[]) => {
+        this.recipeService.setRecipes(response);
       });
   }
 
