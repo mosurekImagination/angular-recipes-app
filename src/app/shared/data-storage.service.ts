@@ -9,26 +9,19 @@ import {map} from 'rxjs/operators';
 export class DataStorageService {
   backend = 'https://angular-recipe-18649.firebaseio.com/recipes.json';
 
-  constructor(private http: HttpClient, private recipeService: RecipeService,
-              private authService: AuthService) {}
+  constructor(private http: HttpClient, private recipeService: RecipeService) {}
 
-  getAuthParam() {
-  return new HttpParams().set('auth', this.authService.getToken());
-  }
+
   storeData() {
-    const token = this.authService.getToken();
     return this.http.put(this.backend,
       this.recipeService.getRecipes());
   }
 
   getData() {
-    const token = this.authService.getToken();
     return this.http.get(this.backend);
   }
 
   getRecipes() {
-    const token = this.authService.getToken();
-
     this.http.get<Recipe[]>(this.backend)
       .pipe(map(
         (recipes) => {
